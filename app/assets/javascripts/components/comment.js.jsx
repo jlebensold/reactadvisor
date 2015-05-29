@@ -1,3 +1,4 @@
+// rails generate react:component Comment author:string body:string rank:integer
 var Comment = React.createClass({
   propTypes: {
     author: React.PropTypes.string,
