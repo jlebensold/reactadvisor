@@ -25,3 +25,4 @@ gem 'spring',        group: :development
 gem 'rails_admin'
 
 gem 'react-rails', '~> 1.0'
+gem 'flux-rails-assets'
