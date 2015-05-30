@@ -1,17 +1,7 @@
 var CommentList = React.createClass({
 
-  getInitialState: function() {
-    return this.getState();
-  },
-
-  getState: function() {
-    return {
-      comments: Store.comments()
-    }
-  },
-
   _onChange: function() {
-    this.setState(this.getState());
+    this.forceUpdate();
   },
 
   componentDidMount: function() {
@@ -25,7 +15,7 @@ var CommentList = React.createClass({
   render: function() {
     return (
       <div>
-        {this.state.comments.map(function(comment) {
+        {Store.comments().map(function(comment) {
           return (<Comment key={comment.id}
           body={comment.body}
           rank={comment.rank}
