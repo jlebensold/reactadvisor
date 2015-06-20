@@ -18,5 +18,6 @@
 //= require flux
 //= require eventemitter
 //= require components
+//= require Store
 //= require app
 //= require_tree .
