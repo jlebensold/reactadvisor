@@ -1,4 +1,3 @@
-// rails generate react:component Comment author:string body:string rank:integer
 var Comment = React.createClass({
   propTypes: {
     author: React.PropTypes.string,
@@ -6,7 +5,7 @@ var Comment = React.createClass({
     rank: React.PropTypes.node
   },
 
-  render: function() {
+  render() {
     return (
       <div>
         <div>Author: {this.props.author}</div>

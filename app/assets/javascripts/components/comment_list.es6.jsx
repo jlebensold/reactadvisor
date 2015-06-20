@@ -1,21 +1,21 @@
 var CommentList = React.createClass({
 
-  _onChange: function() {
+  _onChange() {
     this.forceUpdate();
   },
 
-  componentDidMount: function() {
-    Store.addChangeListener(this._onChange);
+  componentDidMount() {
+    store.addChangeListener(this._onChange);
   },
 
-  componentWillUnmount: function() {
-    Store.removeChangeListener(this._onChange);
+  componentWillUnmount() {
+    store.removeChangeListener(this._onChange);
   },
 
-  render: function() {
+  render() {
     return (
       <div>
-        {Store.comments().map(function(comment) {
+        {store.comments.map( comment => {
           return (<Comment key={comment.id}
           body={comment.body}
           rank={comment.rank}
@@ -26,3 +26,5 @@ var CommentList = React.createClass({
     );
   }
 });
+
+
