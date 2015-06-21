@@ -20,5 +20,9 @@ module Reactadvisor
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.react.addons = true # defaults to false
+
+    Rails.application.config.assets.configure do |env|
+      env.register_transformer 'text/ecmascript-6', 'application/javascript', Sprockets::ES6.new('modules' => 'system', 'moduleIds' => true)
+    end
   end
 end

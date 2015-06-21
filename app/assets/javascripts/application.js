@@ -15,9 +15,14 @@
 //= require lodash.min
 //= require react
 //= require react_ujs
-//= require flux
 //= require eventemitter
+//= require flux
+//= require es6/system
+//
+//= require constants
+//= require actions
+//= require app_dispatcher
 //= require components
-//= require Store
+//= require_tree ./stores
 //= require app
-//= require_tree .
+System.import('app');

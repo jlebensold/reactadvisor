@@ -1,37 +1,16 @@
-// Constants
-const Constants = {
-  CHANGE_EVENT: 'change',
-  ADD_COMMENT: 'comments.add'
-}
+'use strict';
+import CommentStore from "./stores/comment_store";
+import CommentPage from "components/comment_page";
 
 // Actions
-class Actions {
-  static addComment(params) {
-    AppDispatcher.dispatch({
-      actionType: Constants.ADD_COMMENT,
-      comment: params
-    });
-  }
-}
-
-
-
-
-// Dispatcher
-var AppDispatcher = new FluxDispatcher();
-AppDispatcher.register(payload => {
-  var action = payload.actionType;
-
-  switch (action) {
-    case Constants.ADD_COMMENT:
-      store.addComment(payload.comment);
-      break;
-
-    default:
-      // NO-OP
-  }
-});
-var store = new Store();
-
+import Actions from "actions";
+window.Actions = Actions;
 console.info(`try running the following in the console:
-    Actions.addComment({ id: store.comments.length , author: 'jl', body: 'foobar', rank: 5} );`);
+    Actions.addComment({ author: 'jl', body: 'foobar', rank: 5} );`);
+
+window.App = class App extends React.Component {
+  render() {
+    return <CommentPage actions={Actions} commentStore={new CommentStore()} />;
+  }
+};
+
