@@ -1,9 +1,12 @@
 import Comment from './comment';
+import CommentForm from './comment_form';
 class CommentList extends React.Component {
 
-  static get contextTypes() { return {
+  static get contextTypes() {
+    return {
     commentStore: React.PropTypes.object.isRequired
-  }}
+    }
+  }
 
   _onChange() {
     this.forceUpdate();
@@ -20,6 +23,7 @@ class CommentList extends React.Component {
   render() {
     return (
       <div>
+        <CommentForm  />
         {this.context.commentStore.comments.map( comment => {
           return (<Comment key={comment.id}
           body={comment.body}
