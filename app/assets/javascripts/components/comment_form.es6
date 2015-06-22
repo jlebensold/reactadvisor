@@ -1,6 +1,11 @@
 'use strict';
-import Actions from '../actions';
 class CommentForm extends React.Component {
+
+  static get contextTypes() {
+    return {
+      actions: React.PropTypes.func.isRequired
+    }
+  }
 
   constructor() {
     super()
@@ -15,7 +20,7 @@ class CommentForm extends React.Component {
 
   submitComment(event) {
     event.preventDefault();
-    Actions.addComment(this.state);
+    this.context.actions.addComment(this.state);
   }
 
   render() {
