@@ -7,9 +7,11 @@ class CommentForm extends React.Component {
     }
   }
 
+
   constructor() {
     super()
-    this.state = { body: '', author: ''};
+    this.defaultState = { body: '', author: ''};
+    this.state = this.defaultState;
   }
 
   onFieldChange(event) {
@@ -21,6 +23,7 @@ class CommentForm extends React.Component {
   submitComment(event) {
     event.preventDefault();
     this.context.actions.addComment(this.state);
+    this.setState(this.defaultState);
   }
 
   render() {
