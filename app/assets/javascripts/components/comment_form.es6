@@ -7,7 +7,6 @@ class CommentForm extends React.Component {
     }
   }
 
-
   constructor() {
     super()
     this.defaultState = { body: '', author: ''};
