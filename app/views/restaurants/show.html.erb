@@ -4,4 +4,4 @@
 </p>
 
 <h2>Comments</h2>
-<%= react_component('App') %>
+<%= react_component('CommentSection', comments: raw(render(template: 'comments/index.json.jbuilder'))) %>

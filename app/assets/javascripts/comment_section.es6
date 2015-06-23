@@ -8,9 +8,15 @@ window.Actions = Actions;
 console.info(`try running the following in the console:
     Actions.addComment({ author: 'jl', body: 'foobar', rank: 5} );`);
 
-window.App = class App extends React.Component {
+window.CommentSection = class CommentSection extends React.Component {
+  constructor(props) {
+    super();
+    this.actions = Actions;
+    this.store = new CommentStore();
+    this.actions.setComments(JSON.parse(props.comments));
+  }
+
   render() {
-    return <CommentPage actions={Actions} commentStore={new CommentStore()} />;
+    return <CommentPage actions={this.actions} commentStore={this.store} />;
   }
 };
-

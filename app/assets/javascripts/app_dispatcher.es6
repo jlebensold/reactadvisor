@@ -1,2 +1,2 @@
-var AppDispatcher = new FluxDispatcher();
+let AppDispatcher = new FluxDispatcher();
 export default AppDispatcher;

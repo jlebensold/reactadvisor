@@ -11,8 +11,15 @@ class CommentStore extends EventEmitter {
     AppDispatcher.register(payload => {
       var action = payload.actionType;
       switch (action) {
+        case Constants.SET_COMMENTS:
+          _.each(payload.comments, c => {
+            this.addComment(c);
+          });
+          this.emitChange();
+          break;
         case Constants.ADD_COMMENT:
-          this.addComment(_.merge({id: this._comments.length}, payload.comment));
+          this.addComment(payload.comment);
+          this.emitChange();
           break;
 
         default:
@@ -23,12 +30,11 @@ class CommentStore extends EventEmitter {
   }
 
   addComment(comment) {
-    this._comments[comment.id] = comment;
-    this.emitChange();
+    this._comments[comment.id || this._comments.length] = comment;
   }
 
-  get comments() {
-    return this._comments;
+  getComments(parentId) {
+    return _.select(this._comments, c => { return c && c.parent_id === parentId; });
   }
 
   addChangeListener(callback) {
