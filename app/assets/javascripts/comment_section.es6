@@ -12,6 +12,7 @@ window.CommentSection = class CommentSection extends React.Component {
   constructor(props) {
     super();
     this.actions = Actions;
+    this.actions.startWatching();
     this.store = new CommentStore();
     this.actions.setComments(JSON.parse(props.comments));
   }

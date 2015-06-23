@@ -11,10 +11,11 @@ class CommentStore extends EventEmitter {
     AppDispatcher.register(payload => {
       var action = payload.actionType;
       switch (action) {
+        case Constants.UPVOTE_COMMENT:
+          this.upvote(payload.comment);
+          this.emitChange();
         case Constants.SET_COMMENTS:
-          _.each(payload.comments, c => {
-            this.addComment(c);
-          });
+          this.setComments(payload.comments);
           this.emitChange();
           break;
         case Constants.ADD_COMMENT:
@@ -29,12 +30,30 @@ class CommentStore extends EventEmitter {
 
   }
 
+  upvote(comment) {
+    this._comments[comment.id].rank++;
+  }
+
+  setComments(comments) {
+    _.each(comments, c => {
+      this.addComment(c);
+    });
+  }
+
+  hasChildren(comment) {
+    return _.any(this._comments, c => { return c && c.parent_id === comment.id; });
+  }
+
   addComment(comment) {
     this._comments[comment.id || this._comments.length] = comment;
   }
 
   getComments(parentId) {
-    return _.select(this._comments, c => { return c && c.parent_id === parentId; });
+    return _.chain(this._comments)
+      .select(c => { return c && c.parent_id === parentId; })
+      .sortBy('rank')
+      .reverse()
+      .value();
   }
 
   addChangeListener(callback) {

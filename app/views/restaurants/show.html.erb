@@ -1,7 +1,11 @@
-<h1><%= @restaurant.name %></h1>
-<p>
-  <%= @restaurant.description %>
-</p>
+<div class="row">
+  <h1><%= @restaurant.name %></h1>
 
-<h2>Comments</h2>
-<%= react_component('CommentSection', comments: raw(render(template: 'comments/index.json.jbuilder'))) %>
+  <p>
+    <%= @restaurant.description %>
+  </p>
+
+
+  <h2>Comments</h2>
+  <%= react_component('CommentSection', comments: raw(render(template: 'comments/index.json.jbuilder'))) %>
+</div>

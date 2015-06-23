@@ -14,3 +14,11 @@
  *= require_self
  *= require foundation_and_overrides
  */
+
+.comment {
+  list-style-type: none;
+  border-left: 3px solid #CCC;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding-left: 20px;
+}

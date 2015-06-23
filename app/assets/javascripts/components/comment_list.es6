@@ -10,7 +10,7 @@ class CommentList extends React.Component {
 
   static get contextTypes() {
     return {
-    commentStore: React.PropTypes.object.isRequired
+      commentStore: React.PropTypes.object.isRequired
     }
   }
 
@@ -26,11 +26,10 @@ class CommentList extends React.Component {
     return (
       <ul>
         {this.context.commentStore.getComments(this.props.parent_id).map( comment => {
-          return (<Comment key={comment.id}
-          body={comment.body}
-          id={comment.id}
-          rank={comment.rank}
-          author={comment.author}
+          return (<Comment
+          key={comment.id}
+          hasChildren={this.context.commentStore.hasChildren(comment)}
+          {...comment}
         />)
         })}
       </ul>

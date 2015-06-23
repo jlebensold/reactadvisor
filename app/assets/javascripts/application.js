@@ -16,5 +16,4 @@
 //= require_tree ./stores
 //= require comment_section
 System.import('comment_section');
-
 $(function(){ $(document).foundation(); });
