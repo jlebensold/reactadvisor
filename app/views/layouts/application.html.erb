@@ -13,8 +13,28 @@
   </head>
 
   <body>
-
-    <%= yield %>
-
+    <nav class="top-bar foundation-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1>
+            <a href="#">
+              ReactAdvisor
+            </a>
+          </h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="">
+            <%= link_to 'manage restaurants', '/admin' %>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <div class="large-12 columns">
+          <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

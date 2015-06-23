@@ -2,6 +2,13 @@
 import CommentList from "./comment_list";
 import CommentForm from './comment_form';
 class Comment extends React.Component {
+
+  static get contextTypes() {
+    return {
+      actions: React.PropTypes.object.isRequired
+    }
+  }
+
   static get propTypes() {
     return {
       author: React.PropTypes.string,
@@ -13,28 +20,44 @@ class Comment extends React.Component {
     }
   }
 
-  static get contextTypes() {
-    return {
-      actions: React.PropTypes.func.isRequired
-    }
+  constructor() {
+    super();
+    this.state = {isReplying: false };
+  }
+
+  onToggleReply(event) {
+    event.preventDefault();
+    this.setState({isReplying: !this.state.isReplying});
   }
 
   onUpvote(event) {
-    console.log(this.context);
     this.context.actions.upvoteComment(this.props);
   }
 
+  onCommentSubmitted(event) {
+    this.setState({isReplying: false });
+  }
+
   render() {
+    const replyText = this.state.isReplying ? 'Hide' : 'Reply';
     return (
       <li className='comment row collapse'>
-        <p>
-          <strong>{this.props.rank}</strong>
+        <blockquote>
           {this.props.body}
-        </p>
-        <a className='button' onClick={this.onUpvote.bind(this)}>+1</a>
-        <p className='right'>by {this.props.author}</p>
-        { this.props.hasChildren ? (<CommentList parent_id={this.props.id} />) : null }
-        <CommentForm parent_id={this.props.id} />
+          <cite>
+          by {this.props.author}
+          <span className='label secondary right'>{this.props.rank}</span>
+          </cite>
+        </blockquote>
+        <a className='button tiny secondary' onClick={this.onToggleReply.bind(this)}>{replyText}</a>
+        <a className='button tiny' onClick={this.onUpvote.bind(this)}>+1</a>
+        <CommentForm
+          onCommentSubmitted={this.onCommentSubmitted.bind(this)}
+          isReplying={this.state.isReplying}
+          parent_id={this.props.id} />
+        { this.props.hasChildren ?
+          <CommentList parent_id={this.props.id} />
+        : null }
       </li>
     );
   }

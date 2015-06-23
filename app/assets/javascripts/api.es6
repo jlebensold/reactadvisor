@@ -11,6 +11,7 @@ class Api {
     'X-Requested-With': "XMLHttpRequest"
     };
   }
+
   static put(route, params) {
     return this.xhr(route, params, 'put');
   }
@@ -27,7 +28,9 @@ class Api {
       method: verb,
       credentials: 'include',
       headers: this.headers()
-    }, {body: JSON.stringify(params)} ))
+    }, {body: JSON.stringify(params)} )).then( resp => {
+      return resp.json();
+    });
   }
 }
 export default Api;

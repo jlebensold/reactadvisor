@@ -3,7 +3,15 @@ class CommentForm extends React.Component {
 
   static get contextTypes() {
     return {
-      actions: React.PropTypes.func.isRequired
+      actions: React.PropTypes.object.isRequired
+    }
+  }
+
+  static get propTypes() {
+    return {
+      isReplying: React.PropTypes.bool,
+      onCommentSubmitted: React.PropTypes.func,
+      parent_id: React.PropTypes.number
     }
   }
 
@@ -11,7 +19,6 @@ class CommentForm extends React.Component {
     super()
     this.defaultState = { body: '', author: '', rank: 0 };
     this.state = this.defaultState;
-    this.state.isReplying = props.isReplying || false;
   }
 
   onFieldChange(event) {
@@ -20,28 +27,23 @@ class CommentForm extends React.Component {
     this.setState(prop);
   }
 
-  onReply(event) {
-    event.preventDefault();
-    this.setState({isReplying: true});
-  }
-
   onSubmitComment(event) {
     event.preventDefault();
     this.context.actions.addComment(_.merge(this.state, {parent_id: this.props.parent_id}));
     this.setState(this.defaultState);
+    if (this.props.onCommentSubmitted) {
+      this.props.onCommentSubmitted();
+    }
   }
 
   render() {
     return <div>
-        <div className={ this.state.isReplying ? 'hide' : '' } >
-          <a className='button secondary' onClick={this.onReply.bind(this)}> Reply</a>
-        </div>
-        <form className={ this.state.isReplying ? '' : 'hide' } >
+        <form className={ this.props.isReplying ? 'row' : 'row hide' } >
           <label>Author</label>
           <input type="text" name="author" value={this.state.author} onChange={this.onFieldChange.bind(this)} />
           <label>Comment</label>
           <textarea name="body" value={this.state.body} onChange={this.onFieldChange.bind(this)} />
-          <button type="submit" onClick={this.onSubmitComment.bind(this)} >Submit</button>
+          <button className='button right tiny' type="submit" onClick={this.onSubmitComment.bind(this)} >Submit</button>
         </form>
       </div>
   }

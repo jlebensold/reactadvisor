@@ -11,10 +11,10 @@ console.info(`try running the following in the console:
 window.CommentSection = class CommentSection extends React.Component {
   constructor(props) {
     super();
-    this.actions = Actions;
-    this.actions.startWatching();
+    this.actions = new Actions(props.restaurant_id);
     this.store = new CommentStore();
     this.actions.setComments(JSON.parse(props.comments));
+    this.restaurantId = props.restaurant_id;
   }
 
   render() {

@@ -1,12 +1,12 @@
+'use strict';
 import CommentList from "./comment_list";
-import Constants from "./../constants";
 import CommentForm from './comment_form';
 
 class CommentPage extends React.Component {
   static get childContextTypes() {
     return {
       commentStore: React.PropTypes.object.isRequired,
-      actions: React.PropTypes.func.isRequired
+      actions: React.PropTypes.object.isRequired
     }
   };
 

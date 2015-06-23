@@ -3,36 +3,29 @@ import AppDispatcher from './app_dispatcher';
 import Constants from './constants';
 import Api from './api';
 class Actions {
+  constructor(restaurantId) {
+    this.restaurantId = restaurantId;
+    this.watchInterval = setInterval(this.watch.bind(this), 5000);
+  }
 
-  static watchInterval;
-
-
-  static setComments(comments) {
+  setComments(comments) {
     AppDispatcher.dispatch({
       actionType: Constants.SET_COMMENTS,
       comments: comments
     });
   }
 
-  static upvoteComment(comment) {
-    Api.put('/restaurants/1/comments/' + comment.id + '/upvote').then( resp => {
-      return resp.json();
-    }).then( json => {
-      console.log(json);
-    });
-    AppDispatcher.dispatch({
-      actionType: Constants.UPVOTE_COMMENT,
-      comment: comment
+  upvoteComment(comment) {
+    Api.put(`/restaurants/${this.restaurantId}/comments/${comment.id}/upvote`).then( json => {
+      AppDispatcher.dispatch({
+        actionType: Constants.UPVOTE_COMMENT,
+        comment: json
+      });
     });
   }
 
-  static addComment(params) {
-    //TODO: refactor the restaurant-id
-    Api.post('/restaurants/1/comments', {
-      comment: params
-    }).then(resp => {
-      return resp.json();
-    }).then(comment => {
+  addComment(params) {
+    Api.post(`/restaurants/${this.restaurantId}/comments`, { comment: params }).then(comment => {
       AppDispatcher.dispatch({
         actionType: Constants.ADD_COMMENT,
         comment: comment
@@ -40,16 +33,10 @@ class Actions {
     });
   }
 
-  static startWatching() {
-    Actions.watchInterval = setInterval(Actions.watch, 5000);
-  }
-
-  static watch() {
-    Api.get('/restaurants/1/comments').then( resp => {
-        return resp.json()
-      }).then( comments => {
-        Actions.setComments(comments);
-      });
+  watch() {
+    Api.get(`/restaurants/${this.restaurantId}/comments`).then( comments => {
+      this.setComments(comments);
+    });
   }
 }
 export default Actions;

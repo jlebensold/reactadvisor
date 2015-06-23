@@ -1,3 +1,4 @@
+'use strict';
 import Comment from './comment';
 import CommentForm from './comment_form';
 class CommentList extends React.Component {
