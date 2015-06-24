@@ -49,8 +49,8 @@ class Comment extends React.Component {
           <span className='label secondary right'>{this.props.rank}</span>
           </cite>
         </blockquote>
-        <a className='button tiny secondary' onClick={this.onToggleReply.bind(this)}>{replyText}</a>
-        <a className='button tiny' onClick={this.onUpvote.bind(this)}>+1</a>
+        <button className='button tiny secondary' onClick={this.onToggleReply.bind(this)}>{replyText}</button>
+        <button className='button tiny' onClick={this.onUpvote.bind(this)}>+1</button>
         <CommentForm
           onCommentSubmitted={this.onCommentSubmitted.bind(this)}
           isReplying={this.state.isReplying}

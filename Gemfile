@@ -10,7 +10,6 @@ gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
 
 # Gemfile
 gem 'sprockets', '>= 3.0.0'
@@ -27,5 +26,6 @@ gem 'spring',        group: :development
 gem 'ancestry'
 gem 'rails_admin'
 
-gem 'react-rails', '~> 1.0'
+gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
+gem 'therubyracer',  platforms: :ruby
 gem 'flux-rails-assets'

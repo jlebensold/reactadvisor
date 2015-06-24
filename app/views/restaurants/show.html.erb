@@ -12,6 +12,6 @@
     <%= react_component('CommentSection', {
           restaurant_id: @restaurant.id,
           comments: raw(render(template: 'comments/index.json.jbuilder'))
-    }) %>
+    }, prerender: false ) %>
   </div>
 </div>

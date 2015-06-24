@@ -24,5 +24,14 @@ module Reactadvisor
     Rails.application.config.assets.configure do |env|
       env.register_transformer 'text/ecmascript-6', 'application/javascript', Sprockets::ES6.new('modules' => 'system', 'moduleIds' => true)
     end
+
+    config.react.server_renderer_pool_size  ||= 10
+    config.react.server_renderer_timeout    ||= 20 # seconds
+    config.react.server_renderer = React::ServerRendering::SprocketsRenderer
+    config.react.server_renderer_options = {
+      files: ["react.js", "prerendering.js"], # files to load for prerendering
+      replay_console: true,                 # if true, console.* will be replayed client-side
+    }
+
   end
 end

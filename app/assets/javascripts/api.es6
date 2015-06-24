@@ -5,10 +5,10 @@ class Api {
   }
   static headers() {
     return {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'X-CSRF-Token': this.token(),
-    'X-Requested-With': "XMLHttpRequest"
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': this.token(),
+      'X-Requested-With': "XMLHttpRequest"
     };
   }
 
