@@ -9,9 +9,14 @@
   </div>
   <div class="columns medium-6">
     <h3>Comments</h3>
-    <%= react_component('CommentSection', {
-          restaurant_id: @restaurant.id,
-          comments: raw(render(template: 'comments/index.json.jbuilder'))
-    }, prerender: false ) %>
+    <div id="CommentSection"></div>
   </div>
 </div>
+<script>
+  jQuery(function() {CommentSection('CommentSection',
+  {
+    restaurant_id: '<%= @restaurant.id %>',
+    comments: '<%= raw(render(template: 'comments/index.json.jbuilder')) %>'
+  });
+  });
+</script>

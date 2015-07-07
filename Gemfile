@@ -1,6 +1,4 @@
 source 'https://rubygems.org'
-
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
 # Use sqlite3 as the database for Active Record
@@ -13,7 +11,6 @@ gem 'uglifier', '>= 1.3.0'
 
 # Gemfile
 gem 'sprockets', '>= 3.0.0'
-gem 'sprockets-es6'
 
 gem 'foundation-rails'
 
@@ -23,9 +20,9 @@ gem 'jbuilder', '~> 2.0'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
+group :development, :test do
+  gem 'foreman'
+end
+
 gem 'ancestry'
 gem 'rails_admin'
-
-gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
-gem 'therubyracer',  platforms: :ruby
-gem 'flux-rails-assets'

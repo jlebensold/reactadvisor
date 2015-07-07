@@ -1,7 +1,6 @@
-"use strict";
-import Constants from './../constants';
-import AppDispatcher from './../app_dispatcher';
-
+import Constants from '../constants';
+import AppDispatcher from '../app_dispatcher';
+import { EventEmitter } from 'events';
 class CommentStore extends EventEmitter {
 
   constructor() {

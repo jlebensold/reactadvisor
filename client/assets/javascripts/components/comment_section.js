@@ -1,9 +1,9 @@
-'use strict';
-import CommentStore from "./stores/comment_store";
-import CommentPage from "components/comment_page";
-import Actions from "actions";
+import React from 'react';
+import CommentStore from '../stores/comment_store';
+import CommentPage from './comment_page';
+import Actions from '../actions';
 
-window.CommentSection = class CommentSection extends React.Component {
+class CommentSection extends React.Component {
   constructor(props) {
     super();
     this.actions = new Actions(props.restaurant_id);
@@ -15,4 +15,5 @@ window.CommentSection = class CommentSection extends React.Component {
   render() {
     return <CommentPage actions={this.actions} commentStore={this.store} />;
   }
-};
+}
+export default CommentSection;

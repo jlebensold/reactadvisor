@@ -1,0 +1,19 @@
+{
+  "name": "",
+  "version": "",
+  "description": "React with Rails",
+  "main": "server.js",
+  "engines": {
+    "node": "0.12.2"
+  },
+  "scripts": {
+    "postinstall": "cd ./client && npm install",
+    "gulp": "cd ./client && npm run gulp",
+    "test": "rspec && client/bin/lint && (cd client && npm run jscs .)"
+  },
+  "repository": {
+  },
+  "author": "jlebensold",
+  "license": "MIT",
+  "homepage": ""
+}
