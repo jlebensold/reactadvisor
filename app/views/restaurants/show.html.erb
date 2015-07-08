@@ -9,17 +9,6 @@
   </div>
   <div class="columns medium-6">
     <h3>Comments</h3>
-    <div id="CommentSection"><%= isomorphic('CommentSection', {restaurant_id: @restaurant.id, comments: render(template: 'comments/index.json.jbuilder')} ) %></div>
+    <%= isomorphic('CommentSection', 'cs', {restaurant_id: @restaurant.id, comments: render(template: 'comments/index.json.jbuilder')} ) %>
   </div>
 </div>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function(event) { 
-    renderCommentSection('CommentSection',
-    {
-      restaurant_id: '<%= @restaurant.id %>',
-      comments: '<%= raw(render(template: 'comments/index.json.jbuilder')) %>'
-    });
-  });
-</script>

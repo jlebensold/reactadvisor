@@ -33,6 +33,9 @@ class Actions {
   }
 
   watch() {
+    try {
+      fetch
+    } catch(ex) { return; }
     Api.get(`/restaurants/${this.restaurantId}/comments`).then( comments => {
       this.setComments(comments);
     });
