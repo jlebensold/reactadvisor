@@ -1,6 +1,7 @@
 import Constants from '../constants';
 import AppDispatcher from '../app_dispatcher';
 import { EventEmitter } from 'events';
+import _ from 'lodash';
 class CommentStore extends EventEmitter {
 
   constructor() {

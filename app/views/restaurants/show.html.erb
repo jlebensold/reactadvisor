@@ -9,14 +9,17 @@
   </div>
   <div class="columns medium-6">
     <h3>Comments</h3>
-    <div id="CommentSection"></div>
+    <div id="CommentSection"><%= isomorphic('CommentSection', {restaurant_id: @restaurant.id, comments: render(template: 'comments/index.json.jbuilder')} ) %></div>
   </div>
 </div>
+
+
 <script>
-  jQuery(function() {CommentSection('CommentSection',
-  {
-    restaurant_id: '<%= @restaurant.id %>',
-    comments: '<%= raw(render(template: 'comments/index.json.jbuilder')) %>'
-  });
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    renderCommentSection('CommentSection',
+    {
+      restaurant_id: '<%= @restaurant.id %>',
+      comments: '<%= raw(render(template: 'comments/index.json.jbuilder')) %>'
+    });
   });
 </script>

@@ -3,7 +3,6 @@ import Constants from './constants';
 import Api from './api';
 class Actions {
   constructor(restaurantId) {
-
     this.restaurantId = restaurantId;
     this.watchInterval = setInterval(this.watch.bind(this), 5000);
   }

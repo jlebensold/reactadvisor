@@ -24,6 +24,9 @@ class Api {
   }
 
   static xhr(route, params, verb) {
+    if (fetch === undefined) {
+      return;
+    }
     return fetch(route + '.json', _.merge({
       method: verb,
       credentials: 'include',
