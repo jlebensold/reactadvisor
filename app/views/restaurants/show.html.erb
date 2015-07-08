@@ -9,6 +9,10 @@
   </div>
   <div class="columns medium-6">
     <h3>Comments</h3>
-    <%= isomorphic('CommentSection', 'cs', {restaurant_id: @restaurant.id, comments: render(template: 'comments/index.json.jbuilder')} ) %>
+    <% if params[:client].present? %>
+      <%= client('CommentSection', 'cs', {restaurant_id: @restaurant.id, comments: render(template: 'comments/index.json.jbuilder')} ) %>
+    <% else %>
+      <%= isomorphic('CommentSection', 'cs', {restaurant_id: @restaurant.id, comments: render(template: 'comments/index.json.jbuilder')} ) %>
+    <% end %>
   </div>
 </div>
