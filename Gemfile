@@ -22,6 +22,10 @@ gem 'spring',        group: :development
 gem 'httparty'
 group :development, :test do
   gem 'foreman'
+  gem 'capybara'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'poltergeist'
 end
 
 gem 'ancestry'
