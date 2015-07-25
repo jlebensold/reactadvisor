@@ -4,7 +4,7 @@ import Api from './api';
 class Actions {
   constructor(restaurantId) {
     this.restaurantId = restaurantId;
-    this.watchInterval = setInterval(this.watch.bind(this), 5000);
+    this.watchInterval = setInterval(this.watch.bind(this), 1000);
   }
 
   setComments(comments) {
