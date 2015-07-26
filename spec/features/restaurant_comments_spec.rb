@@ -2,11 +2,8 @@ require 'rails_helper'
 describe 'restaurant comments', js: true do
   let(:restaurant) { Restaurant.create(name: 'Los Pollos') }
 
-  before do
-    visit restaurant_path(restaurant)
-  end
-
   it 'adds comments' do
+    visit restaurant_path(restaurant)
     within 'form.row' do
       fill_in :author, with: 'Jon'
       fill_in :body, with: 'Delicious!'
@@ -20,6 +17,11 @@ describe 'restaurant comments', js: true do
   context :replies do
 
     let!(:comment) { Comment.create(author: 'JL', body: 'Delicious!', rank: 0, restaurant: restaurant) }
+
+    before do
+      visit restaurant_path(restaurant)
+    end
+
 
     it 'upvotes' do
       find_button('+1').click()
