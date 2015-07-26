@@ -1,6 +1,8 @@
 import AppDispatcher from './app_dispatcher';
 import Constants from './constants';
 import Api from './api';
+import Promise from 'es6-promise';
+import fetch from 'isomorphic-fetch';
 class Actions {
   constructor(restaurantId) {
     this.restaurantId = restaurantId;

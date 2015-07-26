@@ -1,9 +1,13 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
+require 'simplecov'
+SimpleCov.start 'rails'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
+require 'capybara/poltergeist'
+require "capybara-screenshot/rspec"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -26,14 +30,48 @@ require 'capybara/rails'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+Capybara.asset_host = 'http://localhost:4000'
+
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(
+    app,
+    debug: false,
+    inspector: true,
+    js_errors: true,
+    window_size: [1048, 768],
+    extensions: %w()
+  )
+end
+
+
+Capybara.javascript_driver = :webkit
+
 RSpec.configure do |config|
+  config.include Capybara::DSL
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

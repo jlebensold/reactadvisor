@@ -23,9 +23,14 @@ gem 'httparty'
 group :development, :test do
   gem 'foreman'
   gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'capybara-screenshot'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'poltergeist'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'simplecov'
 end
 
 gem 'ancestry'
