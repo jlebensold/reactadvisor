@@ -4,12 +4,6 @@ import CommentList from "./comment_list";
 import CommentForm from './comment_form';
 class Comment extends React.Component {
 
-  static get contextTypes() {
-    return {
-      actions: React.PropTypes.object.isRequired
-    }
-  }
-
   static get propTypes() {
     return {
       author: React.PropTypes.string,
@@ -17,6 +11,7 @@ class Comment extends React.Component {
       id: React.PropTypes.number,
       hasChildren: React.PropTypes.bool,
       parent_id: React.PropTypes.number,
+      restaurant_id: React.PropTypes.number,
       rank: React.PropTypes.number
     }
   }
@@ -32,7 +27,7 @@ class Comment extends React.Component {
   }
 
   onUpvote(event) {
-    this.context.actions.upvoteComment(this.props);
+    this.props.actions.upvoteComment(this.props.restaurantId, this.props);
   }
 
   onCommentSubmitted(event) {
@@ -54,10 +49,12 @@ class Comment extends React.Component {
         <button className='button tiny' onClick={this.onUpvote.bind(this)}>+1</button>
         <CommentForm
           onCommentSubmitted={this.onCommentSubmitted.bind(this)}
+          addComment={this.props.actions.addComment}
+          restaurant_id={this.props.restaurant_id}
           isReplying={this.state.isReplying}
           parent_id={this.props.id} />
         { this.props.hasChildren ?
-          <CommentList parent_id={this.props.id} />
+          <CommentList {...this.props} parent_id={this.props.id} />
         : null }
       </li>
     );
