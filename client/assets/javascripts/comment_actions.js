@@ -1,18 +1,9 @@
 import Api from './api';
-import Promise from 'es6-promise';
-import fetch from 'isomorphic-fetch';
 import {
   ADD_COMMENT,
   UPVOTE_COMMENT,
   SET_COMMENTS
 } from './actionTypes'
-
-export function setComments(comments) {
-  return {
-    type: SET_COMMENTS,
-    comments: comments,
-  };
-}
 
 export function upvoteComment(restaurantId, comment) {
   return dispatch => {
@@ -37,7 +28,12 @@ export function addComment(restaurantId, params) {
 }
 
 export function watch(restaurantId ) {
-  Api.get(`/restaurants/${this.restaurantId}/comments`).then( comments => {
-    this.setComments(comments);
-  });
+  return dispatch => {
+    Api.get(`/restaurants/${restaurantId}/comments`).then( comments => {
+      dispatch({
+        type: SET_COMMENTS,
+        comments: comments
+      });
+    });
+  };
 }

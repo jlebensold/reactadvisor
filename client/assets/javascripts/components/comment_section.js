@@ -1,13 +1,11 @@
 import React from 'react';
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Connector, Provider }  from 'react-redux';
+import { Provider }  from 'react-redux';
 import CommentPage from './comment_page';
 import * as reducers from  '../reducers';
 
 const reducer = combineReducers(reducers);
-
-// create a store that has redux-thunk middleware enabled
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 

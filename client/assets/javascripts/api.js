@@ -1,3 +1,6 @@
+import Promise from 'es6-promise';
+import fetch from 'isomorphic-fetch';
+
 class Api {
   static token() {
     let el = document.querySelector('meta[name="csrf-token"]');
