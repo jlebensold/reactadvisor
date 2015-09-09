@@ -15,7 +15,7 @@ export default function comments(state = initialState, action) {
     case UPVOTE_COMMENT:
       return state.map(comment => {
             return comment.id === action.comment.id ?
-            _.merge(comment, { rank: json.rank }) :
+            _.merge(comment, { rank: action.comment.rank }) :
             comment;
           });
 
