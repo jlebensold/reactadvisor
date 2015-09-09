@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Connector } from 'react-redux';
+import { connect } from 'react-redux';
 import CommentList from "./comment_list";
 import CommentForm from './comment_form';
 import * as CommentActions from '../comment_actions';
@@ -11,30 +11,42 @@ class CommentPage extends Component {
 
   constructor() {
     super();
-    this.watching = false;
+  }
+
+  componentDidMount() {
+    const { actions: { watch } } = this.props;
+    this.interval = setInterval(watch, 1000, this.props.restaurantId);
+  }
+
+  componentDidUnMount() {
+    clearInterval(this.interval);
   }
 
   render() {
-    return (
-      <Connector select={state => ({ restaurant_id: this.props.restaurantId, comments: state.comments })}>
-        {this.renderChild.bind({watching: false })}
-      </Connector>
+    const { comments, actions, restaurantId } = this.props;
+
+    return (<div className='columns column-6'>
+              <CommentForm
+                  addComment={actions.addComment}
+                  isReplying={true}
+                  parent_id={null}
+                  restaurant_id={ restaurantId }
+              />
+              <CommentList actions={actions} comments={ comments } parent_id={null} />
+            </div>
     );
   }
-
-  renderChild({ restaurantId, comments, restaurant_id, dispatch }) {
-    const actions = bindActionCreators(CommentActions, dispatch);
-
-    if(!this.watching) {
-      this.watching = true;
-      setInterval(actions.watch, 1000, restaurant_id);
-    }
-
-    return <div className='columns column-6'>
-      <CommentForm restaurant_id={ restaurant_id } addComment={actions.addComment} isReplying={true} parent_id={null} />
-      <CommentList comments={ comments } actions={ actions } parent_id={null} />
-    </div>
-  }
-
 }
-export default CommentPage;
+
+function mapStateToProps(state) {
+
+  return ({
+    comments: state.comments
+  });
+}
+
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators(CommentActions, dispatch) };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentPage);
