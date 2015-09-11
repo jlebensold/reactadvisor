@@ -6,9 +6,10 @@ class CommentList extends React.Component {
 
   static get propTypes() {
     return {
+      actions: React.PropTypes.object,
       comments: React.PropTypes.array.isRequired,
-      restaurantId: React.PropTypes.number,
-      parent_id: React.PropTypes.number
+      parent_id: React.PropTypes.number,
+      restaurantId: React.PropTypes.number
     }
   }
 
@@ -25,7 +26,7 @@ class CommentList extends React.Component {
   }
 
   render() {
-    const { comments, actions } = this.props;
+    const { comments } = this.props;
     const filteredComments = this.commentsFiltered(comments, this.props.parent_id);
 
     return (

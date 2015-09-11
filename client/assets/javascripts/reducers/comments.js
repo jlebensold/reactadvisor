@@ -7,7 +7,7 @@ import {
 
 const initialState = [];
 
-export default function comments(state = initialState, action = {}) {
+export default function comments(state = initialState, action) {
   switch (action.type) {
     case SET_COMMENTS:
       return action.comments;
@@ -15,7 +15,7 @@ export default function comments(state = initialState, action = {}) {
     case UPVOTE_COMMENT:
       return state.map(comment => {
             return comment.id === action.comment.id ?
-            _.merge(comment, { rank: comment.rank + 1 }) :
+            _.merge(comment, { rank: action.comment.rank }) :
             comment;
           });
 
